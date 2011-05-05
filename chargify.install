@@ -37,6 +37,12 @@ function chargify_schema() {
         'length' => 64,
         'not null' => TRUE,
       ),
+      'creation_date' => array(
+          'not null' => TRUE,
+          'type' => 'int',
+          'default' => 0,
+          'description' => t('The creation date of the chargify subscription.'),
+      ),
     ),
     'primary key' => array('subscription_id'),
     'indexes' => array('uid' => array('uid')),
@@ -64,6 +70,18 @@ function chargify_schema() {
 
   return $schema;
 }
+
+function chargify_update_1() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysqli':
+    case 'mysql':
+      $ret[] = update_sql("ALTER TABLE chargify_subscriptions ADD COLUMN creation_date int NOT NULL default '0'");
+      break;
+      }
+  return $ret;
+}
+
 
 /**
  * Implementation of hook_install().

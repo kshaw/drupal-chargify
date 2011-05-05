@@ -24,6 +24,10 @@ function chargify_views_data() {
       'left_field' => 'uid',
       'field' => 'uid',
     ),
+    'uc_orders' => array(
+      'left_field' => 'uid',
+      'field' => 'uid',
+    ),
   );
 
   $data['chargify_subscriptions']['uid'] = array(
